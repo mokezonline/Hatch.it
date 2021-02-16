@@ -1,3 +1,4 @@
+import React from 'react';
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,7 @@ class Register extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    //save user to db
     event.preventDefault();
   }
 
