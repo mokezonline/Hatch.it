@@ -25,27 +25,47 @@ const postTodo = (task, callback) => {
     })
     .catch((err) => {
       console.log(err);
-    })
+    });
 };
 
-const getPet = (_id, callback) => {
-  models.Pet.findById(_id)
+const removeTodo = (id, callback) => {
+  models.Todos.remove({_id: id.id})
+    .then((response) => {
+      callback(null, response);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+}
+
+const getPet = (id, callback) => {
+  models.Pets.findById({_id: id.id})
   .then((response) => {
-    callback(response);
+    callback(null, response);
   })
   .catch((err) => callback(err));
 }
 
 const createPet = (pet, callback) => {
-  models.Pet.create(pet)
+  models.Pets.create(pet)
     .then((response) => {
-      callback(response);
+      callback(null, response);
     })
     .catch((err) => {
       callback(err);
     });
 };
 
+const levelUp = (id, callback) => {
+  models.Pets.findByIdAndUpdate({_id: id.id }, { $inc: { evolution: 1 }})
+    .then((response) => {
+      callback(null, response);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+}
+
 module.exports = {
-  getTodos, postTodo, getPet, createPet,
+  getTodos, postTodo, getPet, createPet, levelUp, removeTodo,
 }

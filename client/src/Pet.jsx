@@ -26,7 +26,7 @@ class Pet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      evo: 1,
+      evo: props.evo,
     }
   }
 

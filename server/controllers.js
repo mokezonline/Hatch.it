@@ -24,16 +24,31 @@ const postTodo = (req, res) => {
   });
 };
 
-const getPet = (req, res) => {
+const removeTodo = (req, res) => {
   const { params } = req;
-  const _id = params;
-  model.getPet(_id, (err, response) => {
+  const  _id = params;
+
+  model.removeTodo(_id, (err, response) => {
     if (err) {
+      console.log(err);
       res.status(500).send(err);
     } else {
       res.status(200).send(response);
     }
   })
+};
+
+const getPet = (req, res) => {
+  const { params } = req;
+  const _id = params;
+  model.getPet(_id, (err, response) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(response);
+    }
+  });
 };
 
 const createPet = (req, res) => {
@@ -51,6 +66,19 @@ const createPet = (req, res) => {
   });
 }
 
+const levelUp = (req, res) => {
+  const { params } = req;
+  const _id = params;
+  model.levelUp(_id, (err, response) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(response);
+    }
+  })
+}
+
 module.exports = {
-  getTodos, postTodo, getPet, createPet,
+  getTodos, postTodo, getPet, createPet, levelUp, removeTodo,
 };

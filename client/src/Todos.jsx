@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { response } from 'express';
 import React from 'react';
 import styled from 'styled-components';
 import TodoFormat from './TodoFormat';
@@ -50,6 +51,7 @@ class Todos extends React.Component {
       todos: [],
     }
     this.addTodo = this.addTodo.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
   }
 
   componentDidMount() {
@@ -74,11 +76,26 @@ class Todos extends React.Component {
       })
       .catch((err) => {
         console.log(err);
+      });
+    axios.patch('/pet/602b60713fab9f58669af649')
+      .then((response) => {
+        console.log(response);
       })
-      const { todos } = this.state;
-      todos.push(value);
-      this.setState({ todos });
-      event.preventDefault();
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  
+  deleteTodo(e) {
+    const todoid = e.target.id;
+    axios.delete(`/todos/${todoid}`)
+      .then((response) => {
+        console.log(response);
+        this.props.levelUp();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -86,7 +103,7 @@ class Todos extends React.Component {
     return (
       <TodoWrapper>
         <Label>To-dos</Label>
-          {todos.map((todo) => <TodoFormat todo={todo}/>)}
+          {todos.map((todo) => <TodoFormat todo={todo} deleteTodo={this.deleteTodo} />)}
         <TodoForm onSubmit={this.addTodo}>
           <TextBox type="text" name="todo" />
           <Addtodo type="submit">+</Addtodo>
