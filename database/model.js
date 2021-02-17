@@ -25,10 +25,10 @@ const todoSchema = new Schema ({
   complete: Boolean,
 });
 
-const Pet = model('Pet', petSchema);
-const User = model('User', userSchema);
+const Pets = model('Pet', petSchema);
+const Users = model('User', userSchema);
 const Todos = model('Todos', todoSchema);
 
 module.exports = {
-  Pet, User, Todos
+  Pets, Users, Todos,
 };

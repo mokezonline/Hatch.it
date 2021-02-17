@@ -11,13 +11,13 @@ const Monster = styled.img`
   width: ${
     (props) => {
       const { evo } = props;
-      return 200 + (evo * 10);
+      return 300 + (evo * 50);
     }
   }px;
   height: ${
     (props) => {
       const { evo } = props;
-      return 200 + (evo * 10);
+      return 300 + (evo * 10);
     }
   }px;
 `
@@ -26,8 +26,13 @@ class Pet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      evo: 1,
+      evo: props.evo,
     }
+  }
+  componentDidMount() {
+    this.setState({
+      evo: this.props.evo
+    })
   }
 
   render() {
